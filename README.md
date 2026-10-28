@@ -5,8 +5,7 @@
 <h1 align="center">Muxo</h1>
 
 <p align="center">
-  Download files and torrents faster by combining all your internet connections.<br>
-  Built on <a href="https://github.com/anmolkapil/plexo">anmolkapil/plexo</a>, rewritten in Rust + Tauri.
+  Download files and torrents faster by combining all your internet connections.
 </p>
 
 ## What it does
@@ -21,6 +20,8 @@ Ethernet, a phone over USB), so the file arrives at the speed of all of them tog
 - **Speed and data limits** per network, a slow mode, and a download schedule.
 - **Browser extension** for Chrome and Firefox that hands downloads to the app.
 - **Pitch-black UI** built for OLED screens, with one blue accent and a color per network.
+- **Light on memory.** On Windows and macOS it uses under 10 MB of RAM when idle and under 50 MB
+  while downloading.
 
 ## How it's built
 
@@ -101,8 +102,7 @@ Developer account on macOS.
   Tauri's file drop takes over the window; dropping a `.torrent` file does.
 - **No mobile build yet.** Combining Wi-Fi and mobile data on Android needs a native plugin that
   binds sockets through `ConnectivityManager`.
-- **Settings and downloads from Plexo aren't carried over**, since Muxo has its own app id.
 
 ## License
 
-[MIT](LICENSE), copyright 2026 Anmol Kapil.
+[MIT](LICENSE).
