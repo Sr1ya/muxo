@@ -1,4 +1,5 @@
-/* The app's tokens (src/renderer/src/assets/main.css), so the extension looks like Muxo. */
+/* The app's tokens (src/renderer/src/assets/main.css), so the extension looks like Muxo: pitch
+   black, one blue accent, amber only for warnings. */
 @font-face {
   font-family: 'Manrope';
   font-weight: 400 700;
@@ -11,41 +12,22 @@
 }
 
 :root {
-  color-scheme: light dark;
-  --bg: #ffffff;
-  --bg2: #fafafa;
-  --input: #ffffff;
-  --text: #1d1d1f;
-  --text2: #6e6e73;
-  --text3: #737377;
-  --border: #e0e0e2;
-  --strong: #b9b9bb;
-  --on: #1f8a70;
-  /* Darker than the app's #d97706, so white text on it reads at WCAG AA. */
-  --accent: #b45309;
-  --accent-on: #ffffff;
-  --warn: #92400e;
-  --warn-bg: #fef3c7;
-  --warn-border: #fde68a;
+  color-scheme: dark;
+  --bg: #000000;
+  --bg2: #0a0a0b;
+  --input: #0c0c0e;
+  --text: #f5f5f5;
+  --text2: #a1a1a6;
+  --text3: #7c7c82;
+  --border: #1f1f22;
+  --strong: #2c2c30;
+  --on: #34e0c0;
+  --accent: #4c8dff;
+  --accent-on: #000000;
+  --warn: #ffd57f;
+  --warn-bg: #221804;
+  --warn-border: #4a3509;
   --mono: 'Roboto Mono', ui-monospace, Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1b1e20;
-    --bg2: #202325;
-    --input: #242729;
-    --text: #eae7e2;
-    --text2: #a9adb2;
-    --text3: #8d9196;
-    --border: #2b2f33;
-    --strong: #3a3f44;
-    --on: #4ea89a;
-    --accent: #d8a44c;
-    --accent-on: #1b1408;
-    --warn: #e8bb6d;
-    --warn-bg: #33291a;
-    --warn-border: #54421f;
-  }
 }
 
 * {
@@ -103,7 +85,7 @@ a {
   background: var(--on);
 }
 .dot.warn {
-  background: var(--accent);
+  background: var(--warn);
 }
 
 /* A real checkbox under the switch look, so keyboards and screen readers still work. */
@@ -132,7 +114,7 @@ a {
   transition: transform 0.15s;
 }
 .switch:checked {
-  background: var(--on);
+  background: var(--accent);
 }
 .switch:checked::after {
   transform: translateX(16px);
@@ -160,9 +142,16 @@ button {
   color: var(--text);
   cursor: pointer;
   text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    opacity 150ms ease,
+    scale 120ms cubic-bezier(0.2, 0.8, 0.2, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+button:active:not(:disabled) {
+  scale: 0.97;
 }
 button.primary {
   border: none;
