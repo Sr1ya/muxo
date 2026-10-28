@@ -1,0 +1,11 @@
+node_modules
+dist
+target
+src-tauri/gen
+.DS_Store
+*.log*
+*.tsbuildinfo
+extension/dist
+
+# Local screenshots
+/image.png

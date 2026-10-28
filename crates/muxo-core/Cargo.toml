@@ -1,0 +1,39 @@
+[package]
+name = "muxo-core"
+description = "Muxo's download engine: multi-network HTTP downloads and torrents"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = "1"
+async-trait = "0.1"
+axum = { version = "0.8", default-features = false, features = ["http1", "tokio", "json"] }
+base64 = "0.22"
+bytes = "1"
+chrono = "0.4"
+encoding_rs = "0.8"
+fs4 = { version = "0.13", features = ["sync"] }
+futures = "0.3"
+if-addrs = "0.13"
+librqbit = { version = "8", default-features = false, features = ["rust-tls"] }
+librqbit-core = { version = "5", default-features = false }
+socket2 = { version = "0.5", features = ["all"] }
+parking_lot = "0.12"
+percent-encoding = "2"
+rand = "0.8"
+regex = "1"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "stream", "http2"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["full"] }
+tokio-util = "0.7"
+tracing = "0.1"
+url = "2"
+uuid = { version = "1", features = ["v4"] }
+
+[dev-dependencies]
+tempfile = "3"
+axum = { version = "0.8", features = ["http1", "tokio"] }
+reqwest = { version = "0.12", default-features = false, features = ["json"] }

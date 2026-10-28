@@ -1,0 +1,273 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('./fonts/Manrope-Variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('./fonts/RobotoMono-Variable.woff2') format('woff2');
+}
+
+/* Muxo is dark only: a pitch-black ground for OLED screens and the black-and-white logo. Color is
+   kept for what it means (which network, what went wrong); everything else is grayscale, with one
+   electric-blue accent for actions and selection. */
+:root {
+  color-scheme: dark;
+
+  --bg: #000000;
+  --bg-secondary: #0a0a0b;
+  --bg-tertiary: #121214;
+  --popover-bg: #0f0f11;
+  --input-bg: #0c0c0e;
+  --track-bg: #19191c;
+
+  --text: #f5f5f5;
+  --text-secondary: #a1a1a6;
+  /* The dimmest gray that still clears WCAG AA (4.5:1) on black at the 9-13px it's used at. */
+  --text-tertiary: #7c7c82;
+
+  --border: #1f1f22;
+  --border-subtle: #141416;
+  --border-strong: #2c2c30;
+  --footer-border: #1a1a1d;
+
+  --icon-muted: #2a2a2e;
+  --icon-muted-strong: #36363a;
+  --scrollbar-thumb: #2a2a2e;
+
+  --checkbox-shadow: rgba(0, 0, 0, 0.6);
+  --checkbox-inset-shadow: rgba(0, 0, 0, 0.4);
+
+  --hero-bg: linear-gradient(180deg, #0a0a0b 0%, #000000 100%);
+  --hero-border: #1a1a1d;
+
+  /* Network palette — sage (Wi-Fi), slate (USB) and violet (Ethernet), clear of the blue accent;
+     tints deepened to sit on black. The teal/amber names are kept for saved preferences. */
+  --color-wifi: #8d9797;
+  --color-wifi-bg: #121616;
+  --color-wifi-border: #2a3131;
+  --color-wifi-text: #b9c2c2;
+  --color-wifi-onsolid: #0b0e0e;
+
+  --color-usb: #4e545c;
+  --color-usb-bg: #0f1113;
+  --color-usb-border: #2a2e33;
+  --color-usb-text: #a3aab3;
+  --color-usb-onsolid: #f5f5f5;
+
+  --color-ethernet: #b18cff;
+  --color-ethernet-bg: #160f26;
+  --color-ethernet-border: #33245a;
+  --color-ethernet-text: #d2bcff;
+  --color-ethernet-onsolid: #140a26;
+
+  --color-neutral: #8e8e93;
+  --color-neutral-bg: #141416;
+  --color-neutral-border: #2c2c30;
+  --color-neutral-text: #a1a1a6;
+  --color-neutral-onsolid: #0a0a0b;
+
+  /* Network colors a user can pick (theme.ts NETWORK_COLOR_SWATCHES). Sage (teal), slate (amber) and
+     violet are the kinds' own. */
+  --swatch-teal: #8d9797;
+  --swatch-teal-onsolid: #0b0e0e;
+  --swatch-amber: #4e545c;
+  --swatch-amber-onsolid: #f5f5f5;
+  --swatch-steel: #8fa3c7;
+  --swatch-steel-onsolid: #0b0f1a;
+  --swatch-rose: #ff7a9a;
+  --swatch-rose-onsolid: #26050d;
+  --swatch-violet: #b18cff;
+  --swatch-violet-onsolid: #140a26;
+  --swatch-lime: #a8e05f;
+  --swatch-lime-onsolid: #132006;
+  --swatch-cyan: #4fd2f0;
+  --swatch-cyan-onsolid: #04191f;
+  --swatch-coral: #ff8a5c;
+  --swatch-coral-onsolid: #260d03;
+
+  --color-accent: #4c8dff;
+  --color-accent-onsolid: #000000;
+  --color-success: #34e0c0;
+
+  --color-danger: #ff8a8a;
+  --color-danger-bg: #1f0b0b;
+  --color-danger-border: #3d1717;
+
+  /* Throughput chart's total line and the combine diagram's merge node: the logo's white. */
+  --node-accent: #ffffff;
+
+  /* Shared corner radius for shadcn/Base UI components — matches the 8px most hand-styled
+     buttons/cards already use (see theme.ts), so new and existing components read as one system. */
+  --radius: 8px;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Maps shadcn/Base UI's expected semantic tokens onto Muxo's existing palette above, instead of
+   introducing a second, parallel color system. Tailwind only generates `bg-primary`-style
+   utilities for names declared here, in `@theme` — so this can freely reuse Muxo's own custom
+   property *values* (e.g. --color-accent) without colliding with their names, since only the
+   left-hand names below become Tailwind tokens. */
+@theme inline {
+  --font-sans: 'Manrope', -apple-system, 'SF Pro Text', 'Helvetica Neue', Helvetica, sans-serif;
+  --font-mono: 'Roboto Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-card: var(--bg-secondary);
+  --color-card-foreground: var(--text);
+  --color-popover: var(--popover-bg);
+  --color-popover-foreground: var(--text);
+  --color-primary: var(--color-accent);
+  --color-primary-foreground: var(--color-accent-onsolid);
+  --color-secondary: var(--bg-tertiary);
+  --color-secondary-foreground: var(--text);
+  --color-muted: var(--track-bg);
+  --color-muted-foreground: var(--text-tertiary);
+  --color-destructive: var(--color-danger);
+  --color-border: var(--border);
+  /* Not --input-bg: that's a fill color (white in light mode), invisible as a stroke.
+     border-input needs an actual visible border tone. */
+  --color-input: var(--border-strong);
+  --color-ring: var(--color-accent);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+/* Layered, not plain global CSS, so Tailwind utility classes still win over these resets.
+   Tailwind puts its own utilities in a later layer than base styles, and unlayered CSS beats
+   every layer regardless of specificity, so an unlayered button font reset here previously
+   overrode every text and font utility on every button in the app. box-sizing, margin and
+   padding resets, and the default font family, are already handled by Tailwind Preflight, so
+   they are not repeated here. Body, html and root element sizing now live as utility classes
+   in index.html instead. */
+@layer base {
+  input,
+  [contenteditable] {
+    user-select: text;
+  }
+
+  button {
+    font: inherit;
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease,
+      opacity 150ms ease,
+      scale 120ms var(--ease-out-soft);
+  }
+
+  /* A light press on every button. `scale`, not `transform`, so it doesn't fight the `translate`
+     utilities some buttons already use. */
+  button:active:not(:disabled) {
+    scale: 0.97;
+  }
+
+  ::selection {
+    background: rgba(76, 141, 255, 0.35);
+  }
+
+  /* A desktop app: controls keep the arrow, as native ones do; no pointing hand anywhere. */
+  a,
+  button,
+  [role='button'],
+  [role='menuitem'] {
+    cursor: default;
+  }
+
+  /* No core Tailwind utility for scrollbar pseudo-elements. */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 9999px;
+  }
+}
+
+@keyframes muxo-dash {
+  to {
+    stroke-dashoffset: -60;
+  }
+}
+
+@keyframes muxo-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes muxo-popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* A screen settling in when the view changes. */
+@keyframes muxo-screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* A list row or card arriving. */
+@keyframes muxo-rise {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-screen-in {
+  animation: muxo-screen-in 280ms var(--ease-out-soft) both;
+}
+
+@utility animate-rise {
+  animation: muxo-rise 220ms var(--ease-out-soft) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

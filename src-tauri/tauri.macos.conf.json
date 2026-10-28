@@ -1,0 +1,20 @@
+{
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Muxo",
+        "width": 760,
+        "height": 640,
+        "minWidth": 720,
+        "minHeight": 620,
+        "decorations": true,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "trafficLightPosition": { "x": 16, "y": 16 },
+        "visible": false,
+        "dragDropEnabled": true
+      }
+    ]
+  }
+}

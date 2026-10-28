@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = ["crates/muxo-core", "src-tauri"]
+default-members = ["crates/muxo-core"]
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+license = "MIT"
+authors = ["Anmol Kapil"]
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
